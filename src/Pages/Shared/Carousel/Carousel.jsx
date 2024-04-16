@@ -37,7 +37,7 @@ const Carousel = () => {
               ❯
             </a>
           </div>
-          <div className="container mx-auto">
+          <div className="container m-auto">
           <div className="w-2/3 py-20 ml-20">
             <h1 className="font-sans text-7xl font-bold mb-4">Expert Cleaning Service</h1>
             <h1 className="font-sans text-7xl font-bold mb-4">You Can Trust</h1>
