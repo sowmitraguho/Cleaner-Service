@@ -2,12 +2,13 @@ import { createBrowserRouter } from "react-router-dom";
 import Main from "../../Layout/Main";
 import Home from "../../Pages/Home/Home";
 import Services from "../../Pages/Services/Services";
-import About from "../../Pages/About/About";
+//import About from "../../Pages/About/About";
 import Blog from "../../Pages/Blog/Blog";
 import Contact from "../../Pages/Contact/Contact";
 import LogIn from "../../Pages/Client/LogIn/LogIn";
 import SignUp from "../../Pages/Client/SignUp/SignUp";
 import SingleService from "../../Pages/Services/SingleService";
+import AboutUs from "../../Pages/About/AboutUs";
 
 export const routes = createBrowserRouter([
     {
@@ -31,7 +32,7 @@ export const routes = createBrowserRouter([
             },
             {
                 path: '/about',
-                element: <About></About>
+                element: <AboutUs></AboutUs>
             },
             {
                 path: '/login',
