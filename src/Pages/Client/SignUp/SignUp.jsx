@@ -6,24 +6,63 @@ const SignUp = () => {
   const { createUser } = useContext(AuthContext);
 
   const [error, setError] = useState("");
+  const [user, setUser] = useState({
+    "email": "Demo@email.com",
+    "name": "demo user",
+    "password": "demopass"
+  });
+  
 
 
   const handleSignUp = (event) => {
     event.preventDefault();
-    const form = event.target;
-    const email = form.email.value;
-    const password = form.password.value;
-    createUser(email, password)
+    fetch("http://localhost:5000/clients", {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user)
+    })
+    .then((res) => {
+      return res.json();
+    })
+    .then((data) => {
+      console.log(data);
+      if(data.acknowledged) {
+        alert('user added succesfully');
+        event.target.reset();
+      }
+    })
+
+    
+    // const email = form.email.value;
+    // const password = form.password.value;
+    createUser(user.email, user.password)
       .then((result) => {
         console.log(result);
-        form.reset();
         setError("");
       })
       .catch((err) => {
-        console.error(err);
+        
         setError(err.message);
+        console.error(error);
       });
+    //console.log(createUser, email, password);
+    //console.log(user);
+    
   };
+
+  const handleOnChange = (event) => {
+    const form = event.target;
+    const value = form.value;
+    const field = form.name;
+    const newUser = {...user};
+    newUser[field] = value;
+    setUser(newUser);
+    //console.log(newUser);
+  }
+
+
   return (
     <div className="w-full grid justify-items-center p-32 bg-white">
       <h1 className="text-3xl text-indigo-700 my-8">Sign Up</h1>
@@ -37,7 +76,7 @@ const SignUp = () => {
             <label className="block mb-2 text-sm font-medium text-gray-900">
               Your Name
             </label>
-            <input
+            <input onChange={handleOnChange}
               type="text"
               name="name"
               id="name"
@@ -51,6 +90,7 @@ const SignUp = () => {
               Your email
             </label>
             <input
+              onChange={handleOnChange}
               type="email"
               name="email"
               id="email"
@@ -64,6 +104,7 @@ const SignUp = () => {
               Your password
             </label>
             <input
+              onChange={handleOnChange}
               type="password"
               name="password"
               id="password"
